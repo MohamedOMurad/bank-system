@@ -1,12 +1,18 @@
+import { config } from "dotenv";
+import "reflect-metadata";
 import { DataSource } from "typeorm";
-
+import { Banker } from "../entities/Banker";
+import { Client } from "../entities/Client";
+import { Transaction } from "../entities/Transaction";
+config();
 export const AppDataSource = new DataSource({
   type: "postgres",
-  url: "postgresql://postgres:[YOUR-PASSWORD]@db.jzqvjybgdsorhljwbgul.supabase.co:5432/postgres",
+  url: process.env.DATABASE_URL,
   synchronize: true,
   logging: false,
-  entities: [],
+  entities: [Client, Transaction, Banker],
 });
+
 // export const AppDataSource = new DataSource({
 //   type: "postgres",
 //   host: process.env.DB_HOST || "localhost",
